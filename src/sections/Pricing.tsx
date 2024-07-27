@@ -1,4 +1,7 @@
 import { PricingCard } from '@/components/ui';
+import { twMerge } from 'tailwind-merge';
+import CheckIcon from '@/assets/check.svg';
+
 
 const pricingTiers = [
   {
@@ -61,15 +64,40 @@ export const Pricing = () => {
 
         <div className='flex flex-col gap-6 items-center lg:flex-row lg:gap-x-4 lg:items-end lg:justify-center mt-10'>
           {pricingTiers.map(tier => (
-            <PricingCard key={tier.title} inverse={tier.inverse}>
+            <PricingCard key={tier.title} className={tier.inverse === true ? "border-black bg-black text-white" : ''}>
 
-              <PricingCard.Title inverse={tier.inverse} popular={tier.popular} title={tier.title} />
+              <PricingCard.Header>
+                <h3 className={twMerge("text-lg font-bold text-black/50", tier.inverse === true && "text-white/60")}>{tier.title}</h3>
+                {
+                    !!tier.popular && (
+                      <div className="inline-flex text-sm px-4 py-1.5 rounded-xl border border-white/20">
+                          <span className='bg-[linear-gradient(to_right,#DD7DDF,#E1CD86,#BBCB92,#71C2EF,#3BFFFF,#DD7DDF)] text-transparent bg-clip-text font-medium'>
+                            Popular
+                          </span>
+                      </div>
+                    )
+                }
+              </PricingCard.Header>
 
-              <PricingCard.Price inverse={tier.inverse} price={tier.monthlyPrice} />
+              <PricingCard.Price>
+                <span className={twMerge('text-4xl leading-none font-bold text-black tracking-tighter', tier.inverse === true && 'text-white')}>${tier.monthlyPrice}</span>
+                <span className={twMerge('tracking-tight font-bold text-black/50', tier.inverse === true && 'text-white/50')}>/month</span>
+              </PricingCard.Price>
 
-              <PricingCard.Button inverse={tier.inverse} text={tier.buttonText}/>
+              <PricingCard.Button className={`w-full mt-[30px] ${tier.inverse === true && 'bg-white text-black'}`} >
+                {tier.buttonText}
+              </PricingCard.Button>
 
-              <PricingCard.Features inverse={tier.inverse} features={tier.features} />
+              <PricingCard.Features className='mt-8'>
+                <ul className={twMerge('flex flex-col text-black', tier.inverse === true && 'text-white')}>
+                  {tier.features.map(feature => (
+                    <li key={feature} className='text-small flex items-center gap-4'>
+                      <CheckIcon className='h-6 w-6'/>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </PricingCard.Features>
 
             </PricingCard>
           ))}
