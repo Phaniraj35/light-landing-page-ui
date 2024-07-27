@@ -1,15 +1,9 @@
-import { ReactNode } from "react"
+import { ChildrenWithClassnameType } from "@/types";
 import { twMerge } from "tailwind-merge";
 
-type PricingCardProps = {
-    children: ReactNode,
-    className: string,
-}
-
-
-function PricingCard({ children, className }: PricingCardProps) {
+function PricingCard({ children, className }: ChildrenWithClassnameType) {
     return (
-        <div className={twMerge("p-10 border border-[#F1F1F1] rounded-3xl shadow-[0_7px_14px_#EAEAEA]", className)}>
+        <div className={twMerge("card", className)}>
             {children}
         </div>
     );
@@ -20,12 +14,8 @@ PricingCard.Price = Price;
 PricingCard.Button = Button;
 PricingCard.Features = Features;
 
-type TitleProps = {
-    children: ReactNode,
-    className?: string
-}
 
-function Header({ children, className }: TitleProps) {
+function Header({ children, className }: ChildrenWithClassnameType) {
     return (
         <div className={twMerge("flex justify-between", className)}>
             {children}
@@ -33,12 +23,8 @@ function Header({ children, className }: TitleProps) {
     );
 }
 
-type PriceType = {
-    children: ReactNode,
-    className?: string
-}
 
-function Price({ children, className }:PriceType) {
+function Price({ children, className }:ChildrenWithClassnameType) {
     return (
         <div className={twMerge('flex items-baseline gap-1 mt-[30px]', className)}>
             {children}
@@ -46,23 +32,15 @@ function Price({ children, className }:PriceType) {
     );
 }
 
-type ButtonProps = {
-    children: ReactNode,
-    className?: string
-}
 
-function Button({ children, className}: ButtonProps) {
+function Button({ children, className}: ChildrenWithClassnameType) {
     return (
         <button className={twMerge('btn btn-primary', className)}>{children}</button>
     );
 }
 
-type FeaturesProps = {
-    children: ReactNode,
-    className?: string
-}
 
-function Features({ children, className}: FeaturesProps) {
+function Features({ children, className}: ChildrenWithClassnameType) {
     return (
         <div className={className}>
             {children}
