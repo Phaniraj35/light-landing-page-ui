@@ -1,12 +1,27 @@
+"use client";
+
 import ArrowRight from '@/assets/arrow-right.svg';
 import CogImage from '@/assets/cog.png';
 import Image from 'next/image';
 import CylinderImgae from '@/assets/cylinder.png';
 import NoodleImage from '@/assets/noodle.png';
+import { motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 export const Hero = () => {
+  const heroRef = useRef<HTMLElement|null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start end", "end start"]
+  });
+
+  const translateY = useTransform(scrollYProgress, [0,1], [150, -150]);
+
+  // useMotionValueEvent(translateY, 'change', latest => console.log(`translateY:${latest}`))
+
   return (
-    <section className="pt-8 pb-20 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE_100%)] w-full overflow-x-clip">
+    <section ref={heroRef} className="pt-8 pb-20 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE_100%)] w-full overflow-x-clip">
       <div className="container grid grid-cols-1 md:grid-cols-2 place-items-center">
         <div className="left">
           <div className="tag">Version 2.0 is here</div>
@@ -31,25 +46,39 @@ export const Hero = () => {
         </div>
 
         <div className="right mt-20 w-full h-full md:mt-0 relative">
-          <Image 
-            src={CogImage} 
+          <motion.img 
+            src={CogImage.src} 
             alt='cog graphic'
             className='md:h-full relative'
+            animate={{
+              translateY: [-30, 30]
+            }}
+            transition={{
+              repeat: Infinity,
+              repeatType: "mirror",
+              duration: 3,
+              ease: "easeInOut"
+            }}
             // className='md:absolute md:h-full object-contain md:-bottom-[20%] md:-right-[50%]' 
           />
-          <Image 
-            src={CylinderImgae} 
+          <motion.img 
+            src={CylinderImgae.src} 
             alt='cylinder graphic' 
             height={220} 
             width={220} 
-            className='hidden lg:block lg:absolute lg:-top-12 lg:-left-40' 
+            className='hidden lg:block lg:absolute lg:-top-12 lg:-left-40'
+            style={{ translateY }}
           />
 
-          <Image 
-            src={NoodleImage}
+          <motion.img 
+            src={NoodleImage.src}
             alt='noodle graphic'
             width={220}
             className='hidden lg:block lg:absolute lg:-bottom-12 lg:-right-36 rotate-[30deg]'
+            style={{ translateY }}
+            transition={{
+              ease: "easeInOut"
+            }}
           />
         </div>
     </div>
