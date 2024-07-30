@@ -82,10 +82,10 @@ export const Testimonials = () => {
         <h2 className="section-title mt-5">What our users say</h2>
         <p className="section-description mt-5">From intuitive design to powerful features, our app has become an essential tool for users around the world.</p>
         
-        <div className="flex justify-center gap-6">
-          <TestimonialColumn testimonials={firstColumn} />
-          <TestimonialColumn testimonials={secondColum} className="hidden md:flex" />
-          <TestimonialColumn testimonials={thirdColumn} className="hidden lg:flex" />
+        <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[738px] overflow-hidden">
+          <TestimonialColumn testimonials={firstColumn} duration={15} />
+          <TestimonialColumn testimonials={secondColum} duration={19} className="hidden md:block" />
+          <TestimonialColumn testimonials={thirdColumn} duration={17} className="hidden lg:block" />
         </div>
           
       </div>

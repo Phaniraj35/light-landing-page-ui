@@ -1,5 +1,7 @@
-import { twMerge } from "tailwind-merge";
+"use client";
 import TestimonialCard from "./TestimonialCard";
+import React from "react";
+import { motion } from 'framer-motion';
 
 type Testimonial = {
     text: string,
@@ -10,38 +12,56 @@ type Testimonial = {
 
 type TestimonialColumnProps = {
     testimonials: Testimonial[],
-    className?: string 
+    className?: string,
+    duration?: number
 } 
 
-export default function ({ testimonials, className }:TestimonialColumnProps) {
+export default function ({ testimonials, className, duration = 10 }:TestimonialColumnProps) {
     return (
-        <div className={twMerge('flex flex-col mt-5 gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]', className)}>
-            {testimonials.map(testimonial => (
-                <TestimonialCard key={testimonial.username}>
+        <div className={className}>
+            <motion.div
+                animate={{
+                    translateY: "-50%",
+                }}
+                transition={{
+                    repeat: Infinity,
+                    ease: 'linear',
+                    repeatType: 'loop',
+                    duration
+                }}
+                className='flex flex-col gap-6 pb-6'
+            >
+                {[...new Array(2).fill(0)].map((_,idx) => (
+                    <React.Fragment key={idx}>
+                        {testimonials.map(testimonial => (
+                            <TestimonialCard key={testimonial.username}>
 
-                <TestimonialCard.Text>
-                    {testimonial.text}
-                </TestimonialCard.Text>
-                
+                                <TestimonialCard.Text>
+                                    {testimonial.text}
+                                </TestimonialCard.Text>
+                            
 
-                <div className="flex items-center gap-2 mt-5">
+                                <div className="flex items-center gap-2 mt-5">
 
-                    <TestimonialCard.Avatar 
-                        src={testimonial.imageSrc}
-                        alt={`avatar image of ${testimonial.username}`}
-                        height={40}
-                        width={40}
-                    />
+                                    <TestimonialCard.Avatar 
+                                        src={testimonial.imageSrc}
+                                        alt={`avatar image of ${testimonial.username}`}
+                                        height={40}
+                                        width={40}
+                                    />
 
-                    <TestimonialCard.Author className="flex flex-col">
-                        <p className="font-medium tracking-tight leading-5">{testimonial.name}</p>
-                        <p className="leading-5 tracking-tight">{testimonial.username}</p>
-                    </TestimonialCard.Author>
+                                    <TestimonialCard.Author className="flex flex-col">
+                                        <p className="font-medium tracking-tight leading-5">{testimonial.name}</p>
+                                        <p className="leading-5 tracking-tight">{testimonial.username}</p>
+                                    </TestimonialCard.Author>
 
-                </div>
+                                </div>
 
-                </TestimonialCard>
-          ))}
+                            </TestimonialCard>
+                        ))}
+                    </React.Fragment>
+                ))}
+            </motion.div>
         </div>
     );
 }
