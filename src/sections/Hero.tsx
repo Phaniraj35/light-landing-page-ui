@@ -11,12 +11,12 @@ import { useRef } from 'react';
 export const Hero = () => {
   const heroRef = useRef<HTMLElement|null>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start end", "end start"]
-  });
+  // const { scrollYProgress } = useScroll({
+  //   target: heroRef,
+  //   offset: ["start end", "end start"]
+  // });
 
-  const translateY = useTransform(scrollYProgress, [0,1], [150, -150]);
+  // const translateY = useTransform(scrollYProgress, [0,1], [-150, 150]);
 
   // useMotionValueEvent(translateY, 'change', latest => console.log(`translateY:${latest}`))
 
@@ -61,7 +61,7 @@ export const Hero = () => {
             }}
             // className='md:absolute md:h-full object-contain md:-bottom-[20%] md:-right-[50%]' 
           />
-          <motion.img 
+          {/* <motion.img 
             src={CylinderImgae.src} 
             alt='cylinder graphic' 
             height={220} 
@@ -79,7 +79,7 @@ export const Hero = () => {
             transition={{
               ease: "easeInOut"
             }}
-          />
+          /> */}
         </div>
     </div>
     </section>
