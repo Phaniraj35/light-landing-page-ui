@@ -8,6 +8,15 @@ import apexLogo from '@/assets/logo-apex.png';
 import Image from 'next/image';
 import { motion } from 'framer-motion'
 
+const logos = [
+  acmeLogo,
+  quantumLogo,
+  echoLogo,
+  celestialLogo,
+  pulseLogo,
+  apexLogo,
+]
+
 export const LogoTicker = () => {
   return (
     <div className='w-full py-8 bg-white'>
@@ -25,20 +34,13 @@ export const LogoTicker = () => {
               ease: 'linear'
             }}
           >
-            <Image className='logo-ticker-image' src={acmeLogo} alt='acme'/>
-            <Image className='logo-ticker-image' src={quantumLogo} alt='quantum'/>
-            <Image className='logo-ticker-image' src={echoLogo} alt='echo'/>
-            <Image className='logo-ticker-image' src={celestialLogo} alt='celestial'/>
-            <Image className='logo-ticker-image' src={pulseLogo} alt='pulse'/>
-            <Image className='logo-ticker-image' src={apexLogo} alt='apex'/>
-
-            {/* Duplicate logos for seamless loop */}
-            <Image className='logo-ticker-image' src={acmeLogo} alt='acme'/>
-            <Image className='logo-ticker-image' src={quantumLogo} alt='quantum'/>
-            <Image className='logo-ticker-image' src={echoLogo} alt='echo'/>
-            <Image className='logo-ticker-image' src={celestialLogo} alt='celestial'/>
-            <Image className='logo-ticker-image' src={pulseLogo} alt='pulse'/>
-            <Image className='logo-ticker-image' src={apexLogo} alt='apex'/>
+            {logos.concat(logos).map((logo,idx) => (
+              <Image
+                src={logo}
+                alt={`logo ${idx+1}`}
+                className='h-8 w-auto'
+              />
+            ))}
           </motion.div>
         </div>
       </div>
