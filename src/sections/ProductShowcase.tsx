@@ -41,7 +41,7 @@ export const ProductShowcase = () => {
 
           <motion.img
             src={pyramidImage.src}
-            className='hidden md:block md:absolute md:-right-36 md:-top-20'
+            className='hidden md:block md:absolute md:-right-48 md:-top-20'
             height={262}
             width={262}
             alt='pyramid graphic'
